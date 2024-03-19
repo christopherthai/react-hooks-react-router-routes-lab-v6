@@ -22,6 +22,10 @@ const routes = [
     path: "/actors",
     element: <Actors />,
   },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
 
 ];
 
