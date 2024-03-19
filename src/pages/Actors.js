@@ -8,7 +8,8 @@ function Actors() {
   useEffect(() => {
     fetch("http://localhost:4000/actors")
       .then((response) => response.json())
-      .then((actorsArray) => setActors(actorsArray));
+      .then((actorsArray) => setActors(actorsArray))
+      .catch(error => console.error(error));
   }, []);
 
   const actorList = actors.map((actor) => {

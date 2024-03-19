@@ -10,7 +10,8 @@ function Movie() {
   useEffect(() => {
     fetch(`http://localhost:4000/movies/${movieId}`)
       .then((response) => response.json())
-      .then((movie) => setMovie(movie));
+      .then((movie) => setMovie(movie))
+      .catch((error) => console.error("Error:", error))
   } , [movieId]);
 
   if (!movie) {
