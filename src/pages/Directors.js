@@ -1,32 +1,33 @@
 import { useEffect, useState } from "react";
+import React from "react";
 import NavBar from "../components/NavBar";
-import Card from "../components/Card";
+
 
 function Directors() {
-  const [directors, setDirectors] = useState([]);
+  const [directors, setDirectors] = useState([])
 
   useEffect(() => {
     fetch("http://localhost:4000/directors")
-      .then((response) => response.json())
-      .then((directorsArray) => setDirectors(directorsArray))
-      .catch(error => console.error(error));
-  }, []);
-
-  const directorList = directors.map((director) => {
-    return <Card key={director.id} name={director.name} movies={director.movies} />;
-  });
+      .then(resp => resp.json())
+      .then(data => setDirectors(data))
+  }, [])
 
   return (
-    <>
-      <header>
-        <NavBar />
-      </header>
-      <main>
-        <h1>Directors Page</h1>
-        {directorList}
-      </main>
-    </>
+    <div>
+      <NavBar />
+      <h1>Directors Page</h1>
+      {directors.map((director, index) => (
+        <article key={index}>
+          <h2>{director.name}</h2>
+          <ul>
+            {director.movies.map((movie, index) => (
+              <li key={index}>{movie}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
   );
-};
+}
 
 export default Directors;

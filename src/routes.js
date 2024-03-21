@@ -8,25 +8,20 @@ const routes = [
   {
     path: "/",
     element: <Home />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />
   },
   {
     path: "/movie/:id",
-    element: <Movie />,
+    element: <Movie />
   },
   {
     path: "/directors",
-    element: <Directors />,
+    element: <Directors />
   },
   {
     path: "/actors",
-    element: <Actors />,
-  },
-  {
-    path: "*",
-    element: <ErrorPage />,
-  },
-
-];
+    element: <Actors />
+  }
+]
 
 export default routes;
