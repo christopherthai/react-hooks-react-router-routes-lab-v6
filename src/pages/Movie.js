@@ -1,25 +1,32 @@
 
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
+import { useParams } from "react-router-dom";
 
 function Movie() {
-  const [movie, setMovie] = useState({});
-  const { id } = useParams();
+  const [movie, setMovie] = useState({})
+  const params = useParams()
+  const movieId = params.id
 
   useEffect(() => {
-    fetch(`http://localhost:4000/movies/${id}`)
-      .then(resp => resp.json())
+    fetch(`http://localhost:4000/movies/${movieId}`)
+      .then(res => {
+        if (res.ok) {
+          return (res.json())
+        } else {
+          return (console.error("Something went wrong with your GET request..."))
+        }
+      })
       .then(data => setMovie(data))
-  }, [id])
-
+  }, [movieId])
 
   if (!movie.title) {
     return <h1>Loading...</h1>
   }
 
-  const genres = movie.genres.map(genre => <span key={genre}>{genre}</span>)
-
+  if (!movie.genres) {
+    return <span>Loading...</span>
+  }
   return (
     <>
       <header>
@@ -27,12 +34,13 @@ function Movie() {
       </header>
       <main>
         <h1>{movie.title}</h1>
-        <p>{movie.time}</p>
-        {genres}
+        <p>Runtime: {movie.time}</p>
+        {movie.genres.map(genre => {
+          return <span>{genre}</span>
+        })}
       </main>
     </>
   );
-}
-
+};
 
 export default Movie;

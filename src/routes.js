@@ -1,7 +1,8 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Actors from "./pages/Actors";
+import Directors from "./pages/Directors";
 import Home from "./pages/Home";
 import Movie from "./pages/Movie";
-import Directors from "./pages/Directors";
-import Actors from "./pages/Actors";
 import ErrorPage from "./pages/ErrorPage";
 
 const routes = [
@@ -11,17 +12,20 @@ const routes = [
     errorElement: <ErrorPage />
   },
   {
-    path: "/movie/:id",
-    element: <Movie />
+    path: "/actors",
+    element: <Actors />,
+    errorElement: <ErrorPage />
   },
   {
     path: "/directors",
-    element: <Directors />
+    element: <Directors />,
+    errorElement: <ErrorPage />
   },
   {
-    path: "/actors",
-    element: <Actors />
+    path: "/movie/:id",
+    element: <Movie />,
+    errorElement: <ErrorPage />
   }
-]
+];
 
 export default routes;
